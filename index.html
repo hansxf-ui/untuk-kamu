@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu 🤍</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --pw: min(43vw, 290px);
+    --ph: calc(var(--pw) * 1.42);
+    --pink: #ff8fab;
+    --pink-deep: #e75480;
+    --paper: #fffaf3;
+    --ink: #4a3038;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #ffd3e4;
+    background-image:
+      radial-gradient(rgba(255,255,255,.85) 11%, transparent 12%),
+      radial-gradient(rgba(255,255,255,.85) 11%, transparent 12%);
+    background-size: 92px 92px;
+    background-position: 0 0, 46px 46px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hati {
+    position: fixed;
+    font-size: 26px;
+    opacity: .45;
+    animation: melayang 6s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes melayang {
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50% { transform: translateY(-22px) rotate(8deg); }
+  }
+  .judul-atas {
+    font-family: 'Patrick Hand', cursive;
+    color: #a4133c;
+    font-size: clamp(20px, 5.4vw, 30px);
+    margin-bottom: 18px;
+    text-shadow: 0 2px 0 rgba(255,255,255,.7);
+    z-index: 2;
+    text-align: center;
+    padding: 0 16px;
+  }
+  .panggung { perspective: 2200px; z-index: 2; }
+  .buku {
+    position: relative;
+    width: calc(var(--pw) * 2);
+    height: var(--ph);
+    transform-style: preserve-3d;
+    transition: transform .85s cubic-bezier(.25,.8,.3,1);
+    cursor: pointer;
+    user-select: none;
+    filter: drop-shadow(0 24px 22px rgba(164, 19, 60, .30));
+  }
+  .lembar {
+    position: absolute;
+    top: 0; left: 50%;
+    width: var(--pw);
+    height: var(--ph);
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform .85s cubic-bezier(.25,.8,.3,1);
+  }
+  .lembar.balik { transform: rotateY(-180deg); }
+  .muka {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    background: var(--paper);
+    padding: calc(var(--pw) * .11);
+    display: flex; flex-direction: column;
+  }
+  .muka.depan {
+    border-radius: 6px calc(var(--pw) * .05) calc(var(--pw) * .05) 6px;
+    box-shadow: inset 22px 0 28px -22px rgba(90, 30, 45, .35);
+  }
+  .muka.belakang {
+    transform: rotateY(180deg);
+    border-radius: calc(var(--pw) * .05) 6px 6px calc(var(--pw) * .05);
+    box-shadow: inset -22px 0 28px -22px rgba(90, 30, 45, .35);
+  }
+  .muka h2 {
+    font-family: 'Patrick Hand', cursive;
+    color: var(--pink-deep);
+    font-size: calc(var(--pw) * .125);
+    margin-bottom: calc(var(--pw) * .06);
+    line-height: 1.15;
+  }
+  .muka p {
+    font-size: calc(var(--pw) * .088);
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .nomor {
+    position: absolute;
+    bottom: calc(var(--pw) * .06);
+    font-size: calc(var(--pw) * .055);
+    color: #b98a97;
+    font-weight: 700;
+  }
+  .depan .nomor { right: calc(var(--pw) * .09); }
+  .belakang .nomor { left: calc(var(--pw) * .09); }
+  /* --- sampul --- */
+  .sampul {
+    background: linear-gradient(150deg, #ffb3c9 0%, var(--pink) 55%, var(--pink-deep) 130%);
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+  }
+  .pita {
+    position: absolute; top: 0; left: 0; right: 0; height: calc(var(--pw) * .07);
+    background: repeating-linear-gradient(45deg, #e63946 0 16px, #ffffff 16px 32px);
+    opacity: .9;
+  }
+  .sampul .isi-sampul { margin: auto 0; }
+  .sampul .kecil {
+    font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    font-size: calc(var(--pw) * .055); color: rgba(255,255,255,.9);
+  }
+  .sampul h1 {
+    font-family: 'Patrick Hand', cursive;
+    color: #fff;
+    font-size: calc(var(--pw) * .24);
+    line-height: 1.05;
+    text-shadow: 0 3px 0 rgba(164,19,60,.25);
+    margin: calc(var(--pw) * .04) 0;
+  }
+  .sampul .sub {
+    color: rgba(255,255,255,.95);
+    font-size: calc(var(--pw) * .075);
+    line-height: 1.5;
+    font-weight: 600;
+  }
+  .petunjuk {
+    margin-top: auto;
+    color: #fff;
+    font-weight: 700;
+    font-size: calc(var(--pw) * .07);
+    animation: denyut 1.6s ease-in-out infinite;
+  }
+  @keyframes denyut { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+  .sampul-belakang {
+    background: linear-gradient(210deg, #ffb3c9, var(--pink) 60%, var(--pink-deep) 140%);
+    align-items: center; text-align: center; justify-content: center;
+  }
+  .sampul-belakang .hati-besar { font-size: calc(var(--pw) * .3); }
+  .sampul-belakang p {
+    color: rgba(255,255,255,.95); font-weight: 600;
+    font-size: calc(var(--pw) * .075); line-height: 1.55; margin-top: calc(var(--pw) * .05);
+  }
+  .tulang {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 54px; transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(90,30,45,.16), transparent);
+    pointer-events: none; z-index: 60;
+  }
+  .kontrol {
+    margin-top: 26px;
+    display: flex; align-items: center; gap: 16px;
+    z-index: 2;
+  }
+  .kontrol button {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #a4133c;
+    background: #fff;
+    border: 2px solid #ffb3c9;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(164,19,60,.15);
+    transition: transform .15s ease;
+  }
+  .kontrol button:active { transform: scale(.94); }
+  .kontrol button:disabled { opacity: .35; cursor: default; }
+  .indikator {
+    font-weight: 700; color: #a4133c; font-size: 14px;
+    min-width: 128px; text-align: center;
+  }
+  .kaki {
+    margin-top: 14px;
+    color: rgba(164,19,60,.55);
+    font-size: 12.5px; font-weight: 600;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+
+<span class="hati" style="top:9%; left:7%;">🤍</span>
+<span class="hati" style="top:14%; right:9%; animation-delay:-2s;">🩷</span>
+<span class="hati" style="bottom:12%; left:11%; animation-delay:-4s;">🩷</span>
+<span class="hati" style="bottom:18%; right:7%; animation-delay:-1s;">🤍</span>
+<span class="hati" style="top:44%; left:3%; animation-delay:-3s; font-size:19px;">✨</span>
+<span class="hati" style="top:38%; right:4%; animation-delay:-5s; font-size:19px;">✨</span>
+
+<div class="judul-atas">ada sesuatu buat kamu… buka pelan-pelan ya 🤍</div>
+
+<div class="panggung">
+  <div class="buku" id="buku">
+
+    <!-- Lembar 1: sampul + halaman 1 -->
+    <div class="lembar">
+      <div class="muka depan sampul">
+        <div class="pita"></div>
+        <div class="isi-sampul">
+          <div class="kecil">Sebuah buku kecil</div>
+          <h1>Untuk<br>Kamu</h1>
+          <div class="sub">isinya cuma hal-hal yang<br>nggak pernah sempat<br>aku omongin langsung.</div>
+        </div>
+        <div class="petunjuk">klik buat buka →</div>
+      </div>
+      <div class="muka belakang">
+        <h2>Sumpah Ya…</h2>
+        <p>Aku nggak pernah nyangka bisa senyaman ini sama seseorang. Ngobrol berjam-jam nggak kerasa, diam berdua juga nggak canggung.</p>
+        <p style="margin-top:.7em;">Kalau ini mimpi, tolong jangan bangunin dulu.</p>
+        <div class="nomor">1</div>
+      </div>
+    </div>
+
+    <!-- Lembar 2: halaman 2 + 3 -->
+    <div class="lembar">
+      <div class="muka depan">
+        <h2>Janji Asli!</h2>
+        <p>Janji bakal selalu angkat teleponmu — jam berapa pun. Janji dengerin ceritamu sampai habis, walau aku udah ngantuk.</p>
+        <p style="margin-top:.7em;">Dan janji nggak bakal pergi cuma gara-gara satu hari yang buruk.</p>
+        <div class="nomor">2</div>
+      </div>
+      <div class="muka belakang">
+        <h2>Hal-Hal Kecil</h2>
+        <p>Caramu ketawa sebelum punchline-nya selesai. Caramu bilang “nggak apa-apa” padahal apa-apa.</p>
+        <p style="margin-top:.7em;">Hal kecil buat dunia — hal besar buatku.</p>
+        <div class="nomor">3</div>
+      </div>
+    </div>
+
+    <!-- Lembar 3: halaman 4 + 5 -->
+    <div class="lembar">
+      <div class="muka depan">
+        <h2>Makasih Ya</h2>
+        <p>Makasih udah nemenin telepon sampai ketiduran. Makasih udah percaya cerita hal-hal yang nggak kamu ceritain ke siapa-siapa.</p>
+        <p style="margin-top:.7em;">Makasih… udah milih aku, terus-terusan, setiap hari.</p>
+        <div class="nomor">4</div>
+      </div>
+      <div class="muka belakang">
+        <h2>Maaf Ya</h2>
+        <p>Maaf kalau kadang aku sibuk sama duniaku sendiri. Maaf kalau perhatianku kadang kalah sama notifikasi HP.</p>
+        <p style="margin-top:.7em;">Aku belajar, pelan-pelan, jadi lebih baik buat kamu.</p>
+        <div class="nomor">5</div>
+      </div>
+    </div>
+
+    <!-- Lembar 4: halaman 6 + sampul belakang -->
+    <div class="lembar">
+      <div class="muka depan">
+        <h2>Terakhir…</h2>
+        <p>Bukunya selesai, perasaannya nggak.</p>
+        <p style="margin-top:.7em;">Halaman berikutnya kita tulis bareng-bareng ya — pelan aja, nggak usah buru-buru tamat.</p>
+        <p style="margin-top:.9em; font-family:'Patrick Hand',cursive; color:#e75480;">— dari orang yang paling beruntung karena punya kamu</p>
+        <div class="nomor">6</div>
+      </div>
+      <div class="muka belakang sampul-belakang">
+        <div class="hati-besar">🤍</div>
+        <p>buku ini dibuat pakai kode,<br>buat orang yang paling<br>nggak bisa digantiin.</p>
+      </div>
+    </div>
+
+    <div class="tulang"></div>
+  </div>
+</div>
+
+<div class="kontrol">
+  <button id="btnBalik">← Balik</button>
+  <div class="indikator" id="indikator">Sampul</div>
+  <button id="btnLanjut">Lanjut →</button>
+</div>
+<div class="kaki">klik bukunya juga bisa — kanan buat lanjut, kiri buat balik 📖</div>
+
+<script>
+  const lembar = [...document.querySelectorAll('.lembar')];
+  const buku = document.getElementById('buku');
+  const indikator = document.getElementById('indikator');
+  const btnBalik = document.getElementById('btnBalik');
+  const btnLanjut = document.getElementById('btnLanjut');
+  let idx = 0; // jumlah lembar yang sudah dibalik
+
+  function tata() {
+    lembar.forEach((l, i) => {
+      l.style.zIndex = l.classList.contains('balik') ? i + 1 : lembar.length - i;
+    });
+    buku.style.transform = idx === 0 ? 'translateX(-25%)' : idx === lembar.length ? 'translateX(25%)' : 'translateX(0)';
+    indikator.textContent =
+      idx === 0 ? 'Sampul' :
+      idx === lembar.length ? 'Penutup 🤍' :
+      'Halaman ' + (idx * 2 - 1) + '–' + (idx * 2) + ' dari 6';
+    btnBalik.disabled = idx === 0;
+    btnLanjut.disabled = idx === lembar.length;
+  }
+  function lanjut() { if (idx < lembar.length) { lembar[idx].classList.add('balik'); idx++; tata(); } }
+  function balik() { if (idx > 0) { idx--; lembar[idx].classList.remove('balik'); tata(); } }
+
+  btnLanjut.addEventListener('click', (e) => { e.stopPropagation(); lanjut(); });
+  btnBalik.addEventListener('click', (e) => { e.stopPropagation(); balik(); });
+  buku.addEventListener('click', (e) => {
+    const r = buku.getBoundingClientRect();
+    if (e.clientX > r.left + r.width / 2) lanjut(); else balik();
+  });
+  let sentuhX = null;
+  buku.addEventListener('touchstart', (e) => { sentuhX = e.touches[0].clientX; }, { passive: true });
+  buku.addEventListener('touchend', (e) => {
+    if (sentuhX === null) return;
+    const dx = e.changedTouches[0].clientX - sentuhX;
+    if (dx < -42) lanjut(); else if (dx > 42) balik();
+    sentuhX = null;
+  }, { passive: true });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') lanjut();
+    if (e.key === 'ArrowLeft') balik();
+  });
+  tata();
+</script>
+</body>
+</html>
