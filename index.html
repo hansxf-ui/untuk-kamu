@@ -11,7 +11,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --pw: min(43vw, 290px);
-    --ph: calc(var(--pw) * 1.42);
+    --ph: calc(var(--pw) * 1.52);
     --pink: #ff8fab;
     --pink-deep: #e75480;
     --paper: #fffaf3;
@@ -98,13 +98,13 @@
   .muka h2 {
     font-family: 'Patrick Hand', cursive;
     color: var(--pink-deep);
-    font-size: calc(var(--pw) * .125);
+    font-size: calc(var(--pw) * .118 * var(--fp, 1));
     margin-bottom: calc(var(--pw) * .06);
     line-height: 1.15;
   }
   .muka p {
-    font-size: calc(var(--pw) * .088);
-    line-height: 1.55;
+    font-size: calc(var(--pw) * .078 * var(--fp, 1));
+    line-height: 1.5;
     color: var(--ink);
     font-weight: 500;
   }
@@ -256,7 +256,7 @@
     <div class="lembar">
       <div class="muka depan">
         <h2>Makasih Ya</h2>
-        <p>Makasih udah nemenin telepon sampai ketiduran. Makasih udah percaya cerita hal-hal yang nggak kamu ceritain ke siapa-siapa.</p>
+        <p>Makasih udah nemenin telepon sampai ketiduran. Makasih udah percaya cerita hal yang nggak kamu ceritain ke siapa-siapa.</p>
         <p style="margin-top:.7em;">Makasih… udah milih aku, terus-terusan, setiap hari.</p>
         <div class="nomor">4</div>
       </div>
@@ -292,7 +292,7 @@
   <div class="indikator" id="indikator">Sampul</div>
   <button id="btnLanjut">Lanjut →</button>
 </div>
-<div class="kaki">klik bukunya juga bisa — kanan buat lanjut, kiri buat balik 📖</div>
+<div class="kaki">klik bukunya juga bisa — kanan buat lanjut, kiri buat balik 🤍</div>
 
 <script>
   const lembar = [...document.querySelectorAll('.lembar')];
@@ -336,6 +336,22 @@
     if (e.key === 'ArrowLeft') balik();
   });
   tata();
+
+  // Penyesuai otomatis: pastikan teks tiap halaman muat 100% (tidak kepotong).
+  function sesuaikan() {
+    document.querySelectorAll('.muka').forEach((m) => {
+      let skala = 1;
+      m.style.setProperty('--fp', 1);
+      // scrollHeight pada elemen overflow:hidden tetap melaporkan tinggi isi penuh
+      while (m.scrollHeight > m.clientHeight + 1 && skala > 0.55) {
+        skala -= 0.05;
+        m.style.setProperty('--fp', skala.toFixed(2));
+      }
+    });
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => sesuaikan());
+  window.addEventListener('resize', sesuaikan);
+  sesuaikan();
 </script>
 </body>
 </html>
