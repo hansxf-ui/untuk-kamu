@@ -56,7 +56,17 @@
     text-align: center;
     padding: 0 16px;
   }
-  .panggung { perspective: 2200px; z-index: 2; }
+  .panggung { perspective: 2200px; z-index: 2; animation: bob 5.5s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-11px); } }
+  .bayangan {
+    width: min(62vw, 430px); height: 22px;
+    margin: 20px auto 0;
+    background: radial-gradient(ellipse at center, rgba(164,19,60,.32), transparent 68%);
+    border-radius: 50%;
+    animation: bayar 5.5s ease-in-out infinite;
+    z-index: 1;
+  }
+  @keyframes bayar { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(.86); opacity: .65; } }
   .buku {
     position: relative;
     width: calc(var(--pw) * 2);
@@ -65,7 +75,7 @@
     transition: transform .85s cubic-bezier(.25,.8,.3,1);
     cursor: pointer;
     user-select: none;
-    filter: drop-shadow(0 24px 22px rgba(164, 19, 60, .30));
+    filter: drop-shadow(0 10px 14px rgba(164, 19, 60, .18));
   }
   .lembar {
     position: absolute;
@@ -172,7 +182,7 @@
     pointer-events: none; z-index: 60;
   }
   .kontrol {
-    margin-top: 26px;
+    margin-top: 16px;
     display: flex; align-items: center; gap: 16px;
     z-index: 2;
   }
@@ -286,6 +296,7 @@
     <div class="tulang"></div>
   </div>
 </div>
+<div class="bayangan"></div>
 
 <div class="kontrol">
   <button id="btnBalik">← Balik</button>
