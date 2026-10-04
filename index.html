@@ -171,12 +171,6 @@
     color: rgba(255,255,255,.95); font-weight: 600;
     font-size: calc(var(--pw) * .075); line-height: 1.55; margin-top: calc(var(--pw) * .05);
   }
-  .tulang {
-    position: absolute; top: 0; bottom: 0; left: 50%;
-    width: 54px; transform: translateX(-50%);
-    background: linear-gradient(90deg, transparent, rgba(90,30,45,.16), transparent);
-    pointer-events: none; z-index: 60;
-  }
   .kontrol {
     margin-top: 16px;
     display: flex; align-items: center; gap: 16px;
@@ -203,6 +197,9 @@
   }
   .kaki {
     margin-top: 14px;
+    padding: 0 18px;
+    text-align: center;
+    max-width: 100vw;
     color: rgba(164,19,60,.55);
     font-size: 12.5px; font-weight: 600;
     z-index: 2;
@@ -211,14 +208,14 @@
 </head>
 <body>
 
-<span class="hati" style="top:9%; left:7%;">🤍</span>
-<span class="hati" style="top:14%; right:9%; animation-delay:-2s;">🩷</span>
-<span class="hati" style="bottom:12%; left:11%; animation-delay:-4s;">🩷</span>
+<span class="hati" style="top:9%; left:7%;">❤️</span>
+<span class="hati" style="top:14%; right:9%; animation-delay:-2s;">💕</span>
+<span class="hati" style="bottom:12%; left:11%; animation-delay:-4s;">💕</span>
 <span class="hati" style="bottom:18%; right:7%; animation-delay:-1s;">🤍</span>
 <span class="hati" style="top:44%; left:3%; animation-delay:-3s; font-size:19px;">✨</span>
 <span class="hati" style="top:38%; right:4%; animation-delay:-5s; font-size:19px;">✨</span>
 
-<div class="judul-atas">ada sesuatu buat kamu… buka pelan-pelan ya 🤍</div>
+<div class="judul-atas">ada sesuatu buat kamu… buka pelan-pelan ya ❤️</div>
 
 <div class="panggung">
   <div class="buku" id="buku">
@@ -289,7 +286,6 @@
       </div>
     </div>
 
-    <div class="tulang"></div>
   </div>
 </div>
 <div class="bayangan"></div>
@@ -327,8 +323,11 @@
   function muter(l) {
     l.style.zIndex = 50;
     clearTimeout(timerZ);
-    timerZ = setTimeout(tataZ, 880);
+    timerZ = setTimeout(tataZ, 1100);
   }
+  lembar.forEach((l) => l.addEventListener('transitionend', (e) => {
+    if (e.propertyName === 'transform') tataZ();
+  }));
   function lanjut() { if (idx < lembar.length) { const l = lembar[idx]; l.classList.add('balik'); idx++; muter(l); tata(); } }
   function balik() { if (idx > 0) { idx--; const l = lembar[idx]; l.classList.remove('balik'); muter(l); tata(); } }
 
