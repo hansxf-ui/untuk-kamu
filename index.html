@@ -227,7 +227,7 @@
   <div class="buku" id="buku">
 
     <!-- Lembar 1: sampul + halaman 1 -->
-    <div class="lembar">
+    <div class="lembar" style="z-index:4">
       <div class="muka depan sampul">
         <div class="pita"></div>
         <div class="isi-sampul">
@@ -246,7 +246,7 @@
     </div>
 
     <!-- Lembar 2: halaman 2 + 3 -->
-    <div class="lembar">
+    <div class="lembar" style="z-index:3">
       <div class="muka depan">
         <h2>Janji Asli!</h2>
         <p>Janji bakal selalu angkat teleponmu — jam berapa pun. Janji dengerin ceritamu sampai habis, walau aku udah ngantuk.</p>
@@ -262,7 +262,7 @@
     </div>
 
     <!-- Lembar 3: halaman 4 + 5 -->
-    <div class="lembar">
+    <div class="lembar" style="z-index:2">
       <div class="muka depan">
         <h2>Makasih Ya</h2>
         <p>Makasih udah nemenin telepon sampai ketiduran. Makasih udah percaya cerita hal yang nggak kamu ceritain ke siapa-siapa.</p>
@@ -278,7 +278,7 @@
     </div>
 
     <!-- Lembar 4: halaman 6 + sampul belakang -->
-    <div class="lembar">
+    <div class="lembar" style="z-index:1">
       <div class="muka depan">
         <h2>Terakhir…</h2>
         <p>Bukunya selesai, perasaannya nggak.</p>
@@ -353,6 +353,7 @@
     if (e.key === 'ArrowRight') lanjut();
     if (e.key === 'ArrowLeft') balik();
   });
+  tataZ();
   tata();
 
   // Penyesuai otomatis: pastikan teks tiap halaman muat 100% (tidak kepotong).
