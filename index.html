@@ -75,7 +75,6 @@
     transition: transform .85s cubic-bezier(.25,.8,.3,1);
     cursor: pointer;
     user-select: none;
-    filter: drop-shadow(0 10px 14px rgba(164, 19, 60, .18));
   }
   .lembar {
     position: absolute;
@@ -313,10 +312,13 @@
   const btnLanjut = document.getElementById('btnLanjut');
   let idx = 0; // jumlah lembar yang sudah dibalik
 
-  function tata() {
+  let timerZ = null;
+  function tataZ() {
     lembar.forEach((l, i) => {
       l.style.zIndex = l.classList.contains('balik') ? i + 1 : lembar.length - i;
     });
+  }
+  function tata() {
     buku.style.transform = idx === 0 ? 'translateX(-25%)' : idx === lembar.length ? 'translateX(25%)' : 'translateX(0)';
     indikator.textContent =
       idx === 0 ? 'Sampul' :
@@ -325,8 +327,13 @@
     btnBalik.disabled = idx === 0;
     btnLanjut.disabled = idx === lembar.length;
   }
-  function lanjut() { if (idx < lembar.length) { lembar[idx].classList.add('balik'); idx++; tata(); } }
-  function balik() { if (idx > 0) { idx--; lembar[idx].classList.remove('balik'); tata(); } }
+  function muter(l) {
+    l.style.zIndex = 50;
+    clearTimeout(timerZ);
+    timerZ = setTimeout(tataZ, 880);
+  }
+  function lanjut() { if (idx < lembar.length) { const l = lembar[idx]; l.classList.add('balik'); idx++; muter(l); tata(); } }
+  function balik() { if (idx > 0) { idx--; const l = lembar[idx]; l.classList.remove('balik'); muter(l); tata(); } }
 
   btnLanjut.addEventListener('click', (e) => { e.stopPropagation(); lanjut(); });
   btnBalik.addEventListener('click', (e) => { e.stopPropagation(); balik(); });
