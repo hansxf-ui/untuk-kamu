@@ -97,6 +97,7 @@
     box-shadow: inset 22px 0 28px -22px rgba(90, 30, 45, .35);
   }
   .muka.belakang {
+    visibility: hidden;
     transform: rotateY(180deg);
     border-radius: calc(var(--pw) * .05) 6px 6px calc(var(--pw) * .05);
     box-shadow: inset -22px 0 28px -22px rgba(90, 30, 45, .35);
@@ -114,6 +115,8 @@
     color: var(--ink);
     font-weight: 500;
   }
+  .lembar.lewat .muka.belakang { visibility: visible; }
+  .lembar.lewat .muka.depan { visibility: hidden; }
   .nomor {
     position: absolute;
     bottom: calc(var(--pw) * .06);
@@ -208,14 +211,14 @@
 </head>
 <body>
 
-<span class="hati" style="top:9%; left:7%;">❤️</span>
+<span class="hati" style="top:9%; left:7%;">🤍</span>
 <span class="hati" style="top:14%; right:9%; animation-delay:-2s;">💕</span>
 <span class="hati" style="bottom:12%; left:11%; animation-delay:-4s;">💕</span>
 <span class="hati" style="bottom:18%; right:7%; animation-delay:-1s;">🤍</span>
 <span class="hati" style="top:44%; left:3%; animation-delay:-3s; font-size:19px;">✨</span>
 <span class="hati" style="top:38%; right:4%; animation-delay:-5s; font-size:19px;">✨</span>
 
-<div class="judul-atas">ada sesuatu buat kamu… buka pelan-pelan ya ❤️</div>
+<div class="judul-atas">ada sesuatu buat kamu… buka pelan-pelan ya 🤍</div>
 
 <div class="panggung">
   <div class="buku" id="buku">
@@ -328,8 +331,12 @@
   lembar.forEach((l) => l.addEventListener('transitionend', (e) => {
     if (e.propertyName === 'transform') tataZ();
   }));
-  function lanjut() { if (idx < lembar.length) { const l = lembar[idx]; l.classList.add('balik'); idx++; muter(l); tata(); } }
-  function balik() { if (idx > 0) { idx--; const l = lembar[idx]; l.classList.remove('balik'); muter(l); tata(); } }
+  function jadwalMuka(l, terbalik) {
+    clearTimeout(l._timerMuka);
+    l._timerMuka = setTimeout(() => l.classList.toggle('lewat', terbalik), 430);
+  }
+  function lanjut() { if (idx < lembar.length) { const l = lembar[idx]; l.classList.add('balik'); idx++; jadwalMuka(l, true); muter(l); tata(); } }
+  function balik() { if (idx > 0) { idx--; const l = lembar[idx]; l.classList.remove('balik'); jadwalMuka(l, false); muter(l); tata(); } }
 
   btnLanjut.addEventListener('click', (e) => { e.stopPropagation(); lanjut(); });
   btnBalik.addEventListener('click', (e) => { e.stopPropagation(); balik(); });
